@@ -27,7 +27,7 @@ figma.ui.onmessage = (msg) => {
   //console.log(figma.getLocalPaintStyles());
   if (msg.type === "HyperlinkTarget") {
     const r = figma
-    console.log('r',r)
+    console.log('rde',r)
     //console.log('link', msg); //受け取ったデータ
   }
   if (msg.type === "create-message") {
