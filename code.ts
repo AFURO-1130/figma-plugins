@@ -6,6 +6,8 @@
 // full browser environment (see documentation).
 
 // This shows the HTML page in "ui.html".
+
+
 figma.showUI(__html__);
 // let hoge: StyledTextSegment;
 // console.log(hoge);
@@ -13,11 +15,28 @@ figma.showUI(__html__);
 
 console.log("figma", figma);
 
+
 // Calls to "parent.postMessage" from within the HTML page will trigger this
 // callback. The callback will be passed the "pluginMessage" property of the
 // posted message.
 // figma.ui.postMessage(42);
+figma.ui.postMessage({ type: "networkRequest" });
+// figma.ui.onmessage = async (msg) => {
+//   const text = figma.createText();
+//   console.log('jijijijiji')
+//   // Make sure the new text node is visible where we're currently looking
+//   text.x = figma.viewport.center.x;
+//   text.y = figma.viewport.center.y;
+
+//   await figma.loadFontAsync(text.fontName as FontName);
+//   text.characters = msg;
+
+//   figma.closePlugin();
+// };
+
+// import axios from 'axios'
 figma.ui.onmessage = (msg) => {
+// axios.get('')
   // One way of distinguishing between different types of messages sent from
   // console.log('figmacurrent', figma.currentPage);//型PageNodeらしい
   // console.log("figmaNodeId", figma.getNodeById('0:1'));
@@ -47,7 +66,7 @@ figma.ui.onmessage = (msg) => {
       const rect = figma.createRectangle();
       //console.log("rects", rect);
       rect.x = i * 150;
-      console.log(rect)
+      console.log('rect',rect.id)//ID取得
       //rect.fills = [{ type: "SOLID", color: { r: 1, g: 0.8, b: 0 } }];
       figma.currentPage.appendChild(rect);
       nodes.push(rect);
