@@ -13,7 +13,11 @@
       { pluginMessage: { type: "create-rectangles", count } },
       "*"
     );
-  
+    parent.postMessage(
+      { pluginMessage: { type: "get-colors" } },
+      "*"
+    );
+
 
     // parent.postMessage(
     //   { pluginMessage: { type: "" } },
