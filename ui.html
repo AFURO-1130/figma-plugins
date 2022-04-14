@@ -5,7 +5,6 @@
 <button id="cancel">Cancel</button>
 
 <script>
-
   document.getElementById("create").onclick = () => {
     const textbox = document.getElementById("count");
     const count = parseInt(textbox.value, 10);
@@ -13,7 +12,22 @@
       { pluginMessage: { type: "create-rectangles", count } },
       "*"
     );
-
+    // window.onmessage = async (event) => {
+    //   if (event.data.pluginMessage.type === "networkRequest") {
+    //     console.log('^^^^^^^^')
+    //     var request = new XMLHttpRequest();
+    //     // This link has random lorem ipsum text
+    //     request.open(
+    //       "GET",
+    //       "https://us-central1-pra-functions.cloudfunctions.net/addMessage"
+    //     );
+    //     request.responseType = "text";
+    //     request.onload = () => {
+    //       window.parent.postMessage({ pluginMessage: request.response }, "*");
+    //     };
+    //     request.send();
+    //   }
+    // };
 
     // parent.postMessage(
     //   { pluginMessage: { type: "" } },

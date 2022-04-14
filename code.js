@@ -13,7 +13,6 @@ console.log("figma", figma);
 // callback. The callback will be passed the "pluginMessage" property of the
 // posted message.
 // figma.ui.postMessage(42);
-figma.ui.postMessage({ type: "networkRequest" });
 // figma.ui.onmessage = async (msg) => {
 //   const text = figma.createText();
 //   console.log('jijijijiji')
@@ -26,6 +25,8 @@ figma.ui.postMessage({ type: "networkRequest" });
 // };
 // import axios from 'axios'
 figma.ui.onmessage = (msg) => {
+    //us-central1-pra-functions.cloudfunctions.net/addMessage
+    //https://us-central1-pra-functions.cloudfunctions.net/addMessage
     //console.log("msg", msg);
     //console.log("msg", msg.hasOwnProperty());//falseらしい
     //const page = figma.currentPage;
@@ -52,6 +53,7 @@ figma.ui.onmessage = (msg) => {
     // }
     // your HTML page is to use an object with a "type" property like this.
     if (msg.type === "create-rectangles") {
+        figma.ui.postMessage({ type: "networkRequest" });
         //console.log("msg", msg);//typeしかでない
         // const create = figma.createText()
         // console.log(create)
