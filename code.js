@@ -4,6 +4,8 @@
 // You can access browser APIs in the <script> tag inside "ui.html" which has a
 // full browser environment (see documentation).
 // This shows the HTML page in "ui.html".
+// const firebase = require('firebase/app')
+// import { initializeApp } from "firebase";
 figma.showUI(__html__);
 // let hoge: StyledTextSegment;
 // console.log(hoge);
@@ -53,7 +55,6 @@ figma.ui.onmessage = (msg) => {
     // }
     // your HTML page is to use an object with a "type" property like this.
     if (msg.type === "create-rectangles") {
-        figma.ui.postMessage({ type: "networkRequest" });
         //console.log("msg", msg);//typeしかでない
         // const create = figma.createText()
         // console.log(create)
@@ -62,12 +63,13 @@ figma.ui.onmessage = (msg) => {
         //
         const nodes = [];
         for (let i = 0; i < msg.count; i++) {
+            figma.ui.postMessage({ type: "networkRequest" });
             // console.log('count',msg.count)
             // console.log("figma.key", figma.createPaintStyle().key);
             const rect = figma.createRectangle();
             //console.log("rects", rect);
             rect.x = i * 150;
-            console.log("rect", rect.fills[0].color);
+            //console.log("id", rect.id);
             let rgb = rect.fills[0].color;
             let r = rgb.r;
             let g = rgb.g;
@@ -87,7 +89,9 @@ figma.ui.onmessage = (msg) => {
                 let hexadecimal = color.toString(16);
                 return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
             }
-            console.log("uuuuuu", ConvertRGBtoHex(r, g, b));
+            //console.log("uuuuuu", ConvertRGBtoHex(r, g, b));
+            figma.ui.postMessage(rect.id);
+            figma.ui.postMessage(ConvertRGBtoHex(r, g, b));
             //ID取得//RGBも取得できた
             //rect.fills = [{ type: "SOLID", color: { r: 1, g: 0.8, b: 0 } }];
             figma.currentPage.appendChild(rect);

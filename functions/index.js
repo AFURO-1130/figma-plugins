@@ -1,21 +1,23 @@
 const functions = require("firebase-functions");
-// const hoge = require("../code");
+const admin = require("firebase-admin");
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-exports.date = functions.https.onRequest((req, res) => {
-  res.send('hoghoge');
+//ローカルで実行するには認証情報が必要
+// const serviceAccount = require("path/to/serviceAccountKey.json");
+admin.initializeApp({
+  credential: admin.credential.cert(
+    "/Users/kinjyo/Desktop/dev_desktop/figmaplugins/functions/pra-functions-firebase-adminsdk-dvcd1-8bc99d4302.json"),
+  databaseURL: "https://pra-functions-default-rtdb.firebaseio.com"
 });
-exports.addMessage = functions.https.onRequest(async (req, res) => {
-  // Grab the text parameter.
-  // const original = req.query.text;
-  // Push the new message into Firestore using the Firebase Admin SDK.
-  const writeResult = await admin
-    .firestore()
-    .collection("messages")
-    .add('hoge');
-  // Send back a message that we've successfully written the message
-  res.json({ result: `Message with ID: ${writeResult.id} added.` });
-  res.send('書き込み完了');
+
+const db = admin.firestore();
+
+exports.helloOnCall = functions.https.onCall(async (data, context) => {
+  //write
+  console.log(data);
+  const res = await db.collection("items").add({ name: "hoge" });
+
+  //read
+  const snapshots = await db.collection("items").get();
+  const docs = snapshots.docs.map((doc) => doc.data());
+  return docs.length;
 });
