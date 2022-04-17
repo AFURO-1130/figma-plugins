@@ -6,35 +6,55 @@
 
 <script>
   document.getElementById("create").onclick = () => {
+    console.log("0000000");
     const textbox = document.getElementById("count");
     const count = parseInt(textbox.value, 10);
     parent.postMessage(
       { pluginMessage: { type: "create-rectangles", count } },
       "*"
     );
+
     // onmessage = (event) => {
     //   console.log("got this from the plugin code", event.data.pluginMessage);
     // };
     window.onmessage = async (event) => {
-      console.log(event.data.pluginMessage)
-      if (event.data.pluginMessage.type === "networkRequest") {
-        //console.log("-------", event);
-        var request = new XMLHttpRequest();
-        //request.setRequestHeader('Content-Type', 'application/json' )
-        // This link has random lorem ipsum text
-        request.open("GET", "");
-        //request.responseType = "text";
-        // request.onload = () => {
-        //   window.parent.postMessage({pluginMessage: request.response}, '*')
-        // };
-        //console.log("req", request);
-        request.send(event.data.pluginMessage);
-        console.log("成功",request);
-      }
+      console.log(event.data.pluginMessage);
+      console.log("^^^^^^^^^^");
+      // if (event.data.pluginMessage.type === "networkRequest") {
+      //console.log("-------", event);
+
+      var request = new XMLHttpRequest();
+      await request.open(
+        "POST",
+        "https://us-central1-pra-functions.cloudfunctions.net/hello",
+        true
+      );
+      await request.send(event.data.pluginMessage);
+      console.log("成功", request);
+
+      // if (request.readyState === 4) {
+      // for (let i = 0; i < 2; i++) {
+
+      // }
+      // await request.open(
+      //   "POST",
+      //   "https://us-central1-pra-functions.cloudfunctions.net/hello",
+      //   true
+      // );
+      //request.responseType = "text";
+      // request.onload = () => {
+      //   window.parent.postMessage({pluginMessage: request.response}, '*')
+      // };
+      //console.log("req", request);
+      // }
+      //request.setRequestHeader('Content-Type', 'application/json' )
+      // This link has random lorem ipsum text
+
+      // }
     };
     // window.onmessage = async (event) => {
     //   if (event.data.pluginMessage.type === "networkRequest") {
-    //     console.log('^^^^^^^^')
+    //     console.log("^^^^^^^^");
     //     var request = new XMLHttpRequest();
     //     // This link has random lorem ipsum text
     //     request.open(

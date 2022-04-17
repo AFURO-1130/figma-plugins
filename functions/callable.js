@@ -15,8 +15,11 @@ const functions = firebase.functions();
 functions.useFunctionsEmulator("http://localhost:5001");
 
 const main = async () => {
-  const helloOnCall = functions.httpsCallable("helloOnCall");
-  const res = await helloOnCall({});
+  console.log("1ooooooo");
+  const hello = functions.httpsCallable("helloOnCall");
+  console.log("2ooooooo");
+  const res = await hello({ text: "text" });
+  console.log("3ooooooo");
   console.log(res);
 };
 
