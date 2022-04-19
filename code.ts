@@ -24,11 +24,13 @@ console.log("-------");
 //figma.currentPage.findAll().length;
 
 const nodes: SceneNode[] = [];
+//console.log("NodeのID取得", figma.currentPage.findAll());
+
 for (let i = 0; i < 2; i++) {
   if (figma.currentPage.findAll()) {
     //console.log("NodeのID取得", figma.currentPage.findAll()[i].id);
   }
-
+  //console.log("NodeのID取得", figma.currentPage.findAll());
 
   // console.log('count',msg.count)
   // console.log("figma.key", figma.createPaintStyle().key);
@@ -70,7 +72,7 @@ for (let i = 0; i < 2; i++) {
   //rect.fills = [{ type: "SOLID", color: { r: 1, g: 0.8, b: 0 } }];
   //figma.currentPage.appendChild(rect);
 
-  // console.log("Nodeの数", figma.currentPage.findAll());
+
 
   // const main = async () => {
   //   const hello = functions.httpsCallable("helloOnCall");
@@ -79,9 +81,12 @@ for (let i = 0; i < 2; i++) {
   //   console.log(res);
   // };
   // main();
-  //console.log('nodes', nodes[i].id)
+  console.log("nodes", nodes);
   //上記のコードでTSの良さがわかった.idがないのを先に警告してくれた
+  nodes.push(figma.currentPage.findAll()[i].fills[0].color);
+  console.log('ID',nodes)
 }
+ console.log("Nodeの数", figma.currentPage.findAll());
 
 figma.currentPage.selection = nodes;
 figma.viewport.scrollAndZoomIntoView(nodes);
@@ -163,13 +168,14 @@ figma.ui.onmessage = (msg) => {
       //console.log("uuuuuu", ConvertRGBtoHex(r, g, b));
       console.log(rect.id);
       console.log(ConvertRGBtoHex(r, g, b));
+      //nodes.push(rect.id)
+      console.log(nodes)
 
 
 
-
-      
-      figma.ui.postMessage(rect.id)
-      figma.ui.postMessage(ConvertRGBtoHex(r, g, b));
+      //figma.ui.postMessage('#hho')
+      // figma.ui.postMessage(rect.id)
+      // figma.ui.postMessage(ConvertRGBtoHex(r, g, b));
       // figma.ui.postMessage(rect.id);
       // figma.ui.postMessage(ConvertRGBtoHex(r, g, b));
       //ID取得//RGBも取得できた

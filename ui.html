@@ -29,7 +29,8 @@
         "https://us-central1-pra-functions.cloudfunctions.net/hello",
         true
       );
-      await request.send(event.data.pluginMessage);
+      //await request.send(event.data.pluginMessage);
+      await request.send('#hohohh')
       console.log("成功", request);
 
       // if (request.readyState === 4) {

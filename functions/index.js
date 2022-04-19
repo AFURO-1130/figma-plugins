@@ -27,6 +27,7 @@ exports.helloOnCall = functions.https.onCall(async (data, context) => {
 exports.hello = functions.https.onRequest(async (req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
   res.send('huhuhuhuh')
+  //res.send(req.body)
   console.log(req.method)
   console.log(req.query)
   console.log('body',req.body)
@@ -41,9 +42,9 @@ exports.hello = functions.https.onRequest(async (req, res) => {
   //   res.status(500).send("Method Not Allowed");
   //   return;
   // }
-  if (req.body === /^#.*/) {
-    await db.collection("items").add({ Color: req.body });
-  }
+  // if (req.body === 'hoge') {
+  //   await db.collection("items").add({ Color: req.body });
+  // }
   await db.collection("items").add({ ids: req.body });
 
   // res.status(200).send(req.body);
